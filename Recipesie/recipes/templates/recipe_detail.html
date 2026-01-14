@@ -1,0 +1,43 @@
+{% extends "base2.html" %}
+
+{% block content %}
+
+<h2>{{ recipe.name }}</h2>
+
+<p><strong>Minutes:</strong> {{ recipe.minutes }}</p>
+<p><strong>Steps:</strong> {{ recipe.nsteps }}</p>
+<p><strong>Description:</strong> {{ recipe.description }}</p>
+
+<h4>Ingredients</h4>
+<ul>
+{% for ing in recipe.ingredients.all %}
+    <li>{{ ing.ingredient }}</li>
+{% endfor %}
+</ul>
+
+{% if recipe.image %}
+    <img src="{{ recipe.image.url }}" width="300">
+{% endif %}
+
+<h4>Reviews</h4>
+
+{% if reviews %}
+<table class="table">
+    <tr>
+        <th>Rating</th>
+        <th>Content</th>
+        <th>User</th>
+    </tr>
+    {% for review in reviews %}
+    <tr>
+        <td>{{ review.rating }}</td>
+        <td>{{ review.content }}</td>
+        <td>{{ review.creator }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No reviews yet.</p>
+{% endif %}
+
+{% endblock %}

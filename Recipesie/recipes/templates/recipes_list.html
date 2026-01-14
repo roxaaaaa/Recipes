@@ -1,0 +1,55 @@
+{% extends "base2.html" %}
+
+{% block content %}
+<ul class="list-group">
+    {% for item in recipe_list %}
+        <li class="list-group-item">
+
+            <span class="text-info">Name: </span>{{ item.recipe.name }}<br>
+            <span class="text-info">Minutes: </span>{{ item.recipe.minutes }}<br>
+            <span class="text-info">Number of Steps: </span>{{ item.recipe.nsteps }}<br>
+            <span class="text-info">Description: </span>{{ item.recipe.description }}<br>
+            <span class="text-info">Contributor: </span>{{ item.recipe.contributor }}<br>
+
+            <span class="text-info">Ingredients: </span>
+            {% for ing in item.ingredients %}
+                {{ ing.ingredient }},
+            {% endfor %}
+            <br>
+
+            <span class="text-info">Tags: </span>
+            {% for ta in item.tags %}
+                {{ ta.tag }},
+            {% endfor %}
+            <br>
+
+            <span class="text-info">Rating: </span>
+            <span class="badge badge-primary">{{ item.recipe_rating|default:"N/A" }}</span><br>
+
+            <span class="text-info">Number of reviews: </span>{{ item.number_of_reviews }}<br><br>
+
+            <!-- ALWAYS AVAILABLE -->
+            <a href="{% url 'recipe_detail' %}?recipe_id={{ item.recipe.id }}" class="btn btn-sm btn-info">
+                View
+            </a>
+
+            <a href="{% url 'edit_recipe' item.recipe.id %}" class="btn btn-sm btn-warning">
+                Edit
+            </a>
+
+            <!-- ONLY IF REVIEWS EXIST -->
+            {% if item.recipe_rating %}
+                <a href="/Recipesie/recipes_reviews/detail/?recipe_id={{ item.recipe.id }}"
+                   class="btn btn-sm btn-primary">
+                    Reviews
+                </a>
+            {% else %}
+                <span class="text-secondary ml-2">
+                    No reviews yet
+                </span>
+            {% endif %}
+
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

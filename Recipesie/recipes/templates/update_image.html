@@ -1,0 +1,16 @@
+{% extends "base2.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Update Image for: {{ recipe.name }}</h2>
+
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}  <button type="submit" class="btn btn-primary">Upload Image</button>
+    </form>
+
+    {% if recipe.recipe_img %}
+        <p class="mt-3">Current Image: <a href="{{ recipe.recipe_img.url }}">{{ recipe.recipe_img.name }}</a></p>
+    {% endif %}
+</div>
+{% endblock %}
