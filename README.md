@@ -27,7 +27,7 @@ A web-based recipe management system built with Django that allows users to crea
    git clone https://github.com/roxaaaaa/Recipes.git
    cd Recipes
 2. **Create a virtual environment**
-   ```bash
+    ```bash
     python -m venv venv
     source venv/bin/activate  # On Windows: venv\Scripts\activate
    
